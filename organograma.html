@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Organograma Defesa Civil</title>
+  <script src="https://unpkg.com/gojs/release/go.js"></script>
+  <style>
+    #myDiagramDiv {
+      width: 100%;
+      height: 100vh;
+      border: 0;
+      background: #163D9E; /* mantido caso o SVG não carregue */
+      box-shadow: none;
+    }
+    body {
+      margin: 0;
+      font-family: Segoe UI, Roboto, Arial, sans-serif;
+      background: #163D9E url('public/background.svg') no-repeat center top / cover;
+    }
+    /* Suaviza a borda e cria contraste leve */
+    #myDiagramDiv {
+      border: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div id="myDiagramDiv"></div>
+  <script>
+    var $ = go.GraphObject.make;
+
+    var myDiagram =
+      $(go.Diagram, "myDiagramDiv",
+        {
+          initialAutoScale: go.Diagram.Uniform,
+          layout: $(go.TreeLayout, { angle: 90, layerSpacing: 50, nodeSpacing: 10 }),
+          contentAlignment: go.Spot.Center,
+          "undoManager.isEnabled": true
+        });
+
+    // Utilitário para contraste automático do texto baseado na cor de fundo
+    function computeTextColor(hex) {
+      if (!hex || typeof hex !== 'string') return '#0b2a4d';
+      var h = hex.replace('#','');
+      if (h.length === 3) h = h.split('').map(function(c){return c+c;}).join('');
+      var r = parseInt(h.substr(0,2), 16)/255;
+      var g = parseInt(h.substr(2,2), 16)/255;
+      var b = parseInt(h.substr(4,2), 16)/255;
+      // luminância relativa (WCAG)
+      var a = [r,g,b].map(function(v){ return v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4); });
+      var luminance = 0.2126*a[0] + 0.7152*a[1] + 0.0722*a[2];
+      return luminance > 0.6 ? '#0b2a4d' : '#ffffff';
+    }
+
+    // Template padrão (foto ao lado do texto)
+    myDiagram.nodeTemplate =
+      $(go.Node, "Auto",
+        {
+          click: function(e, node) {
+            // Alterna expansão apenas para nós com filhos (ex.: Departamentos)
+            var it = node.findTreeChildrenNodes();
+            if (it.next()) node.isTreeExpanded = !node.isTreeExpanded;
+          }
+        },
+        $(go.Shape, "RoundedRectangle",
+          {
+            fill: "white", strokeWidth: 2, stroke: "#180369",
+            parameter1: 12,
+            portId: "", cursor: "pointer",
+            fromLinkable: true, toLinkable: true,
+          }
+        ),
+        $(go.Panel, "Horizontal",
+          { margin: 10, stretch: go.GraphObject.Fill },
+          $("TreeExpanderButton", { alignment: go.Spot.Left, margin: new go.Margin(0, 12, 0, 0) }),
+          $(go.Panel, "Spot",
+            { margin: new go.Margin(0, 14, 0, 0) },
+            new go.Binding("visible", "", function(d){
+              var nome = (d && d.nome ? String(d.nome) : "").toLowerCase();
+              var isGerencia = nome.indexOf("gerência") === 0 || nome.indexOf("gerencia") === 0 || nome.indexOf("subgerência") === 0 || nome.indexOf("subgerencia") === 0;
+              return !isGerencia; // mostra para todos exceto gerências
+            }),
+            $(go.Shape, "Circle", { width: 60, height: 60, fill: "#fff", stroke: "#ccc", strokeWidth: 1.2 }),
+            $(go.Picture,
+              {
+                desiredSize: new go.Size(56, 56),
+                imageStretch: go.GraphObject.UniformToFill
+              },
+              new go.Binding("source", "avatar")
+            )
+          ),
+          $(go.TextBlock,
+            {
+              margin: 4,
+              font: "bold 13px Segoe UI",
+              stroke: "#180369",
+              textAlign: "center",
+              wrap: go.TextBlock.WrapFit,
+              width: 240
+            },
+            new go.Binding("text", "nome")
+          )
+        )
+      );
+
+    // Template do Secretário (foto acima do texto)
+    myDiagram.nodeTemplateMap.add("secretario",
+      $(go.Node, "Auto",
+        {
+          click: function(e, node) {
+            var it = node.findTreeChildrenNodes();
+            if (it.next()) node.isTreeExpanded = !node.isTreeExpanded;
+          }
+        },
+        $(go.Shape, "RoundedRectangle",
+          {
+            fill: "white", strokeWidth: 2, stroke: "#180369",
+            parameter1: 12,
+            portId: "", cursor: "pointer",
+            fromLinkable: true, toLinkable: true,
+          }
+        ),
+        $(go.Panel, "Vertical",
+          { margin: 10, stretch: go.GraphObject.Fill },
+          $("TreeExpanderButton", { alignment: go.Spot.Left, margin: new go.Margin(0,0,10,0) }),
+          $(go.Panel, "Spot",
+            { alignment: go.Spot.Top, margin: new go.Margin(0, 0, 6, 0) },
+            new go.Binding("visible", "", function(d){
+              var nome = (d && d.nome ? String(d.nome) : "").toLowerCase();
+              var isGerencia = nome.indexOf("gerência") === 0 || nome.indexOf("gerencia") === 0 || nome.indexOf("subgerência") === 0 || nome.indexOf("subgerencia") === 0;
+              return !isGerencia;
+            }),
+            $(go.Shape, "Circle", { width: 60, height: 60, fill: "#fff", stroke: "#ccc", strokeWidth: 1.2 }),
+            $(go.Picture,
+              {
+                desiredSize: new go.Size(56, 56),
+                imageStretch: go.GraphObject.UniformToFill
+              },
+              new go.Binding("source", "avatar")
+            )
+          ),
+          $(go.TextBlock,
+            {
+              margin: 4,
+              font: "bold 13px Segoe UI",
+              stroke: "#180369",
+              textAlign: "center",
+              wrap: go.TextBlock.WrapFit,
+              width: 240
+            },
+            new go.Binding("text", "nome")
+          )
+        )
+      )
+    );
+
+    // Template dos links
+    myDiagram.linkTemplate =
+      $(go.Link,
+        { routing: go.Link.Orthogonal, corner: 5 },
+        $(go.Shape, { strokeWidth: 1.25, stroke: "#777" }));
+
+    // Estrutura Geral
+    var nodeDataArray = [
+      { key: 1, nome: "SECRETÁRIO", cor: "#180369", avatar: "public/CEL MAXIMO.png", category: "secretario" },
+      { key: 2, parent: 1, nome: "Unidade de Controle Interno (UCI)", cor: "#f2f2f2", avatar: "public/UCI.png" },
+      { key: 3, parent: 1, nome: "Fundo Estadual de Proteção e Defesa Civil (FEPDEC)", cor: "#f2f2f2", avatar: "public/FEPDEC.png" },
+      { key: 4, parent: 1, nome: "Ouvidoria (OUV)", cor: "#f2f2f2", avatar: "public/OUV.png" },
+      { key: 5, parent: 1, nome: "Secretaria Executiva (SEC EXEC)", cor: "#bfbfbf", avatar: "public/SEC EXEC.png" },
+      { key: 6, parent: 1, nome: "Gabinete (GAB)", cor: "#f2f2f2", avatar: "public/GAB.png" },
+      { key: 7, parent: 1, nome: "Assessoria de Comunicação (ASSCOM)", cor: "#f2f2f2", avatar: "public/ASSCOM.png" },
+      { key: 8, parent: 1, nome: "Assessoria Jurídica (AJUR)", cor: "#f2f2f2", avatar: "public/AJUR.png" },
+
+      // Subordinados à Secretaria Executiva
+      { key: 9, parent: 5, nome: "Secretaria Adjunta Administrativa (SEC ADJ ADM)", cor: "#d9ead3" },
+      { key: 10, parent: 5, nome: "Secretaria Adjunta Técnica (SEC ADJ TEC)", cor: "#cfe2f3", avatar: "public/SEC ADJ TEC.png" },
+      { key: 11, parent: 5, nome: "Secretaria Adjunta de Operações (SEC ADJ OPE)", cor: "#fce5cd", avatar: "public/SEC ADJ OPE.png" },
+
+      // Subordinandos à Secretaria ADM 
+      { key: 12, parent: 9, nome: "Departamento de Recursos Humanos (DRH)", cor: "#e2efda", avatar: "public/DRH.png" },
+      { key: 13, parent: 12, nome: "Gerência de Folha de Pagamento (GFPAG)", cor: "#f9f9f9" },
+      { key: 14, parent: 12, nome: "Gerência de Pessoal (GPES)", cor: "#f9f9f9" },
+      { key: 15, parent: 12, nome: "Gerência de Publicação (GPUB)", cor: "#f9f9f9" },
+      { key: 16, parent: 12, nome: "Gerência de Cadastro de Passagens e Diárias (GCPD)", cor: "#f9f9f9" },
+      { key: 17, parent: 12, nome: "Gerência de Saúde e Assistência Social (GSAS)", cor: "#f9f9f9" },
+      { key: 18, parent: 9, nome: "Departamento de Orçamento e Finanças (DOF)", cor: "#e2efda" },
+      { key: 19, parent: 18, nome: "Gerência de Orçamento (GORC)", cor: "#f9f9f9" },
+      { key: 20, parent: 18, nome: "Gerência de Finanças (GFIN)", cor: "#f9f9f9" },
+      { key: 21, parent: 18, nome: "Gerência de Contabilidade (GCONT)", cor: "#f9f9f9" },
+      { key: 22, parent: 18, nome: "Gerência de Contratos e Convênios (GCC)", cor: "#f9f9f9" },
+      { key: 23, parent: 9, nome: "Departamento de Logística (DLOG)", cor: "#e2efda", avatar: "public/DLOG.png" },
+      { key: 24, parent: 23, nome: "Gerência de Almoxarifado (ALMOX)", cor: "#f9f9f9" },
+      { key: 25, parent: 23, nome: "Gerência de Patrimônio (GPAT)", cor: "#f9f9f9" },
+      { key: 26, parent: 23, nome: "Gerência de Transporte (GTR)", cor: "#f9f9f9" },
+      { key: 27, parent: 23, nome: "Gerência de Arquivo (GARQ)", cor: "#f9f9f9" },
+      { key: 28, parent: 23, nome: "Gerência de Segurança Patrimonial (GSP)", cor: "#f9f9f9" },
+      { key: 29, parent: 9, nome: "Departamento de Compras (DCOMP)", cor: "#e2efda", avatar: "public/DCOMP.png" },
+
+       // Subordinandos à Secretaria TEC
+      { key: 30, parent: 10, nome: "Departamento de Suporte em TI (DSUP)", cor: "#cfe2f3" },
+      { key: 31, parent: 30, nome: "Gerência de Monitoramento e Segurança (GMS)", cor: "#f9f9f9" },
+      { key: 32, parent: 30, nome: "Gerência de Suporte (GSU)", cor: "#f9f9f9" },
+      { key: 33, parent: 30, nome: "Gerência de Banco de Dados (GBD)", cor: "#f9f9f9" },
+      { key: 34, parent: 30, nome: "Gerência de Arquivo Digital (GAD)", cor: "#f9f9f9" },
+      { key: 35, parent: 10, nome: "Departamento de Desenvolvimento de Sistemas (DDS)", cor: "#cfe2f3", avatar: "public/DDS.png" },
+      { key: 36, parent: 35, nome: "Gerência de Desenvolvimento Web (GDW)", cor: "#f9f9f9" },
+      { key: 37, parent: 35, nome: "Gerência de Desenvolvimento Mobile (GDM)", cor: "#f9f9f9" },
+      { key: 38, parent: 35, nome: "Gerência de Estatística e Análise de Dados (GEAD)", cor: "#f9f9f9" },
+      { key: 39, parent: 35, nome: "Gerência de Análise de Requisitos (GAR)", cor: "#f9f9f9" },
+      { key: 40, parent: 35, nome: "Gerência de Testes e Garantia da Qualidade (GTGQ)", cor: "#f9f9f9" },
+      { key: 41, parent: 10, nome: "Departamento de Planejamento (DPLAN)", cor: "#cfe2f3", avatar: "public/DPLAN.png" },
+      { key: 42, parent: 41, nome: "Gerência de Elaboração de Projetos e Captação de Recursos (GPCR)", cor: "#f9f9f9" },
+      { key: 43, parent: 10, nome: "Departamento de Ensino (DENS)", cor: "#cfe2f3", avatar: "public/DENS.png" },
+      { key: 44, parent: 43, nome: "Gerência de Pedagogia (GPED)", cor: "#f9f9f9" },
+      { key: 45, parent: 43, nome: "Gerência de Pesquisa e Doutrina (GPD)", cor: "#f9f9f9" },
+      { key: 46, parent: 10, nome: "Centro de Monitoramento e Alerta (CEMOA)", cor: "#cfe2f3", avatar: "public/CEMOA.png" },
+      { key: 47, parent: 46, nome: "Gerência de Monitoramento (GMO)", cor: "#f9f9f9" },
+      { key: 48, parent: 47, nome: "Subgerência de Monitoramento Geohidrológico (SGMG)", cor: "#f9f9f9" },
+      { key: 49, parent: 47, nome: "Subgerência de Monitoramento Meteorológico (SGMM)", cor: "#f9f9f9" },
+      { key: 50, parent: 46, nome: "Gerência de Alerta (GAL)", cor: "#f9f9f9" },
+      { key: 51, parent: 46, nome: "Gerência de Adaptação e Mudanças Climáticas (GAMC)", cor: "#f9f9f9" },
+
+      // Subordinandos à Secretaria OPE
+      { key: 52, parent: 11, nome: "Coordenadoria de Execução de Projetos", cor: "#fce5cd" },
+      { key: 53, parent: 11, nome: "Departamento de Preparação (DPREP)", cor: "#fce5cd", avatar: "public/DPREP.png" },
+      { key: 54, parent: 53, nome: "Gerência de Planejamento e Controle (GPLAN)", cor: "#f9f9f9" },
+      { key: 55, parent: 53, nome: "Gerência de Dados e Indicadores (GIND)", cor: "#f9f9f9" },
+      { key: 56, parent: 11, nome: "Departamento de Prevenção e Engenharia (DPEN)", cor: "#fce5cd", avatar: "public/DPEN.png" },
+      { key: 57, parent: 56, nome: "Gerência de Engenharia Preventiva (GEP)", cor: "#f9f9f9" },
+      { key: 58, parent: 56, nome: "Gerência de Projetos de Engenharia (GPEN)", cor: "#f9f9f9" },
+      { key: 59, parent: 56, nome: "Gerência de Recuperação e Reconstrução (GREC)", cor: "#f9f9f9" },
+      { key: 60, parent: 56, nome: "Gerência de Análise de Riscos Ambientais e Químicos  (GARAQ)", cor: "#f9f9f9" },
+      { key: 61, parent: 11, nome: "Departamento de Resposta ao Desastre e Suporte (DRDS)", cor: "#fce5cd", avatar: "public/DRDS.png" },
+      { key: 62, parent: 61, nome: "Gerência de Capacitação (GCAP)", cor: "#f9f9f9" },
+      { key: 63, parent: 61, nome: "Gerência de Intervenção (GINT)", cor: "#f9f9f9" },
+      { key: 64, parent: 61, nome: "Gerência de Operações (GDO)", cor: "#f9f9f9" },
+      { key: 65, parent: 61, nome: "Gerência de Análise de Prestação de Contas (GAPC)", cor: "#f9f9f9" },
+      { key: 66, parent: 11, nome: "Departamento das Regionais (DREG)", cor: "#fce5cd", avatar: "public/DREG.png" },
+      { key: 67, parent: 66, nome: "Gerência Administrativa (GADMIN)", cor: "#f9f9f9" },
+      { key: 68, parent: 66, nome: "Gerências Regionais (GREG)", cor: "#f9f9f9" },
+      { key: 69, parent: 66, nome: "Gerência de Call Center (GCENTER)", cor: "#f9f9f9" }
+    ];
+
+    myDiagram.model = new go.TreeModel(nodeDataArray);
+
+    // Função para ajustar o diagrama à viewport, centralizado
+    function fitToViewport(padding) {
+      var div = myDiagram.div;
+      if (!div) return;
+      var pad = padding || 20;
+      var availW = Math.max(0, div.clientWidth - pad * 2);
+      var availH = Math.max(0, div.clientHeight - pad * 2);
+      var bounds = myDiagram.documentBounds;
+      if (bounds.width === 0 || bounds.height === 0) return;
+      var scaleW = availW / bounds.width;
+      var scaleH = availH / bounds.height;
+      var scale = Math.min(scaleW, scaleH);
+      // limita para evitar zoom exagerado ou mínimo demais
+      scale = Math.max(0.2, Math.min(scale, 3));
+      myDiagram.scale = scale;
+      myDiagram.centerRect(bounds);
+    }
+
+    // Colapsa inicialmente todos os Departamentos (Secretarias permanecem visíveis)
+    myDiagram.addDiagramListener("InitialLayoutCompleted", function() {
+      myDiagram.commit(function(diag){
+        diag.nodes.each(function(node) {
+          var n = ((node.data && node.data.nome) || "").toLowerCase();
+          if (n.indexOf("departamento") === 0) node.isTreeExpanded = false;
+          // Garante que CEMOA inicie sempre fechado
+          if (n.indexOf("centro de monitoramento e alerta") !== -1) node.isTreeExpanded = false;
+        });
+
+        // Expande especificamente a Secretaria Executiva para exibir as Secretarias Adjuntas
+        var secExec = null;
+        diag.nodes.each(function(node){
+          var n = ((node.data && node.data.nome) || "").toLowerCase();
+          if (n.indexOf("secretaria executiva") !== -1) secExec = node;
+        });
+        if (secExec) {
+          secExec.isTreeExpanded = true;
+          // Mantém as Secretarias Adjuntas visíveis porém colapsadas
+          var it = secExec.findTreeChildrenNodes();
+          while (it.next()) {
+            var child = it.value;
+            var cname = ((child.data && child.data.nome) || "").toLowerCase();
+            if (cname.indexOf("secretaria adjunta") === 0) child.isTreeExpanded = false;
+          }
+        }
+      }, "collapse-secretarias");
+    });
+
+    // Sempre que expandir/colapsar
+    myDiagram.addDiagramListener("TreeExpanded", function(e) {
+      var diagram = e.diagram;
+      var node = e.subject.part; // nó que foi expandido
+      diagram.commit(function(diag){
+        if (node) {
+          // Ao expandir uma Secretaria, colapsa seus filhos (Departamentos, Centros, etc.)
+          var name = ((node.data && node.data.nome) || "").toLowerCase();
+          if (name.indexOf("secretaria") !== -1) {
+            var it = node.findTreeChildrenNodes();
+            while (it.next()) {
+              var child = it.value;
+              child.isTreeExpanded = false;
+            }
+          }
+          // Ao expandir o CEMOA, mantém suas gerências fechadas inicialmente
+          if (name.indexOf("centro de monitoramento e alerta") !== -1) {
+            var it2 = node.findTreeChildrenNodes();
+            while (it2.next()) {
+              it2.value.isTreeExpanded = false;
+            }
+          }
+        }
+      }, "collapse-children-on-expand");
+      fitToViewport(24);
+    });
+    myDiagram.addDiagramListener("TreeCollapsed", function() { fitToViewport(24); });
+
+    // Garante ajuste após qualquer layout
+    myDiagram.addDiagramListener("LayoutCompleted", function(){ fitToViewport(24); });
+
+    // Reajusta no resize da janela
+    window.addEventListener('resize', function() { fitToViewport(24); });
+  </script>
+</body>
+</html>
