@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('public/painel defesa civil - totem fundo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .title {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .timeline-container {
+            background: transparent;
+            border: none;
+            padding: 50px;
+            width: 99%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            position: relative;
+        }
+
+        .timeline-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+
+        .year-block {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .year-block:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .year-block.orange {
+            background: #FF7F00;
+            color: white;
+        }
+
+        .year-block.white {
+            background: white;
+            color: #333;
+        }
+
+        .year-block.rounded-left {
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+        }
+
+        .year-block.rounded-right {
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+        }
+
+        .year-block.rounded-both {
+            border-radius: 25px;
+        }
+
+        .year-block.rectangular {
+            border-radius: 8px;
+        }
+
+        .year-block .year-text {
+            padding: 25px 45px;
+            font-size: 1.6rem;
+            font-weight: bold;
+            text-align: center;
+            white-space: nowrap;
+            color: inherit;
+        }
+
+        .year-block.orange .year-text {
+            color: white;
+        }
+
+        .year-block.white .year-text {
+            color: #333;
+        }
+
+        .start-cap {
+            width: 30px;
+            height: 60px;
+            background: #666;
+            border-radius: 15px;
+            margin-right: -5px;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(26, 43, 109, 0.95));
+            color: white;
+            padding: 35px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            max-width: 550px;
+            z-index: 1000;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                0 10px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            border: 3px solid rgba(255, 127, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(15px) scale(0.95);
+        }
+
+        .tooltip.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+
+        .tooltip h3 {
+            color: #FF7F00;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            border-bottom: 3px solid rgba(255, 127, 0, 0.3);
+            padding-bottom: 12px;
+        }
+
+        .tooltip ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .tooltip li {
+            margin-bottom: 8px;
+        }
+
+        .tooltip strong {
+            color: #FF7F00;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .logos-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .logo-main {
+            font-size: 1.8rem;
+            color: #FF7F00;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .logo-subtitle {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .logo-state {
+            font-size: 1.4rem;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .logo-government {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+
+            .timeline-container {
+                padding: 40px 25px;
+            }
+
+            .year-block .year-text {
+                padding: 12px 20px;
+                font-size: 1.1rem;
+            }
+
+            .tooltip {
+                max-width: 320px;
+                font-size: 0.85rem;
+                padding: 20px;
+            }
+
+            .logos-container {
+                flex-direction: column;
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timeline-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .year-block {
+                width: 100%;
+            }
+
+            .year-block .year-text {
+                padding: 15px;
+                font-size: 1.1rem;
+            }
+
+            .tooltip {
+                max-width: 250px;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="back-button" onclick="window.history.back()">
+        <span>←</span>
+        <span>Voltar</span>
+    </button>
+
+    <div class="container">
+        <div class="timeline-container">
+            <div class="timeline">
+                <!-- Primeira linha -->
+                <div class="timeline-row">
+                    <div class="year-block orange rounded-left" data-year="1942">
+                        <div class="year-text">1942</div>
+                    </div>
+                    <div class="year-block white rectangular" data-year="1943">
+                        <div class="year-text">1943</div>
+                    </div>
+                    <div class="year-block orange rectangular" data-year="1946">
+                        <div class="year-text">1946</div>
+                    </div>
+                    <div class="year-block white rectangular" data-year="1966">
+                        <div class="year-text">1966</div>
+                    </div>
+                    <div class="year-block orange rounded-right" data-year="1967">
+                        <div class="year-text">1967</div>
+                    </div>
+                </div>
+
+                <!-- Segunda linha -->
+                <div class="timeline-row">
+                    
+                    <div class="year-block white rounded-left" data-year="1971">
+                        <div class="year-text">1971</div>
+                    </div>
+                    <div class="year-block orange rectangular" data-year="1977">
+                        <div class="year-text">1977</div>
+                    </div>
+                    <div class="year-block white rectangular" data-year="1988">
+                        <div class="year-text">1988</div>
+                    </div>
+                    <div class="year-block orange rectangular" data-year="1990">
+                        <div class="year-text">1990</div>
+                    </div>
+                    <div class="year-block white rounded-right" data-year="1998">
+                        <div class="year-text">1998</div>
+                    </div>
+                </div>
+
+                <!-- Terceira linha -->
+                <div class="timeline-row">
+                    <div class="year-block orange rounded-left" data-year="2008">
+                        <div class="year-text">2008</div>
+                    </div>
+                    <div class="year-block white rectangular" data-year="2009">
+                        <div class="year-text">2009</div>
+                    </div>
+                    <div class="year-block orange rectangular" data-year="2010">
+                        <div class="year-text">2010</div>
+                    </div>
+                    <div class="year-block white rectangular" data-year="2019">
+                        <div class="year-text">2019</div>
+                    </div>
+                    <div class="year-block orange rounded-right" data-year="2023">
+                        <div class="year-text">2023</div>
+                    </div>
+                </div>
+
+                <!-- Quarta linha -->
+                <div class="timeline-row">
+                    <div class="year-block orange rounded-left" data-year="2024">
+                        <div class="year-text">2024</div>
+                    </div>
+                    <div class="year-block white rounded-right" data-year="2025">
+                        <div class="year-text">2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tooltips -->
+    <div class="tooltip" id="tooltip-1942">
+        <h3>1942 – Segunda Guerra Mundial</h3>
+        <ul>
+            <li>Afundamento dos navios Arara e Itagiba na costa brasileira (56 mortes)</li>
+            <li>Criação do primeiro esboço da Defesa Civil no Brasil, em resposta às ameaças externas</li>
+            <li>Criação do Serviço de Defesa Passiva Antiaérea</li>
+        </ul>
+    </div>
+
+    <div class="tooltip" id="tooltip-1943">
+        <h3>1943</h3>
+        <p><strong>Reestruturação do serviço</strong> → torna-se o Serviço de Defesa Civil</p>
+    </div>
+
+    <div class="tooltip" id="tooltip-1946">
+        <h3>1946</h3>
+        <p>Extinção do Serviço de Defesa Civil e das Diretorias Regionais nos estados, territórios e no Distrito Federal</p>
+    </div>
+
+    <div class="tooltip" id="tooltip-1966">
+        <h3>1966</h3>
+        <p>Fortes chuvas no Sudeste motivam a criação de um Grupo de Trabalho para estruturar ações frente a desastres</p>
+    </div>
+
+    <div class="tooltip" id="tooltip-1967">
+        <h3>1967</h3>
+        <ul>
+            <li>Elaboração do Plano Diretor de Defesa Civil do Estado da Guanabara</li>
+            <li>Criação da primeira Defesa Civil Estadual no Brasil, com as Coordenadorias Regionais de Defesa Civil (REDEC)</li>
+            <li>Criação do Ministério do Interior, responsável por coordenar ações de assistência em calamidades públicas</li>
+        </ul>
+    </div>
+
+    <div class="tooltip" id="tooltip-1971">
+        <h3>1971 – Amazonas</h3>
+        <p>Criação do Plano de Emergência e da Comissão de Defesa Civil do Estado do Amazonas, sob o governador <strong>Cel. Eng. João Walter de Andrade</strong></p>
+    </div>
+
+    <div class="tooltip" id="tooltip-1977">
+        <h3>1977 – Amazonas</h3>
+        <p>Nomeação do Comandante-Geral da Polícia Militar, <strong>Cel. PM Mário Perelló Ossuosky</strong>, como coordenador da Defesa Civil estadual</p>
+    </div>
+
+    <div class="tooltip" id="tooltip-1988">
+        <h3>1988</h3>
+        <p>Criação do <strong>Sistema Nacional de Defesa Civil (SINDEC)</strong> pelo Decreto nº 97.274</p>
+        <p>➡ Estrutura oficial e integrada para a gestão de desastres no Brasil</p>
+    </div>
+
+    <div class="tooltip" id="tooltip-1990">
+        <h3>1990</h3>
+        <p>Implementação da <strong>Política Nacional de Defesa Civil (PNDC)</strong>, com foco em:</p>
+        <ul>
+            <li>Prevenção</li>
+            <li>Preparação</li>
+            <li>Resposta</li>
+            <li>Reconstrução</li>
+        </ul>
+        <p><strong>Ações importantes:</strong></p>
+        <ul>
+            <li>Reestruturação da Secretaria Nacional de Defesa Civil (SEDEC)</li>
+            <li>Criação de manuais e classificação de desastres</li>
+            <li>Capacitação de gestores públicos</li>
+        </ul>
+    </div>
+
+    <div class="tooltip" id="tooltip-1998">
+        <h3>1998 – Amazonas</h3>
+        <p>A Emenda Constitucional nº 031 cria o <strong>Corpo de Bombeiros Militar do Amazonas</strong>, que passa a ser responsável pela Defesa Civil estadual</p>
+    </div>
+
+    <div class="tooltip" id="tooltip-2008">
+        <h3>2008 – Amazonas</h3>
+        <ul>
+            <li>Criação do Subcomando de Ações de Defesa Civil (Subcomadec) por lei estadual</li>
+            <li>Instituição do Sistema Estadual de Defesa Civil (SIEDC)</li>
+        </ul>
+    </div>
+
+    <div class="tooltip" id="tooltip-2009">
+        <h3>2009</h3>
+        <ul>
+            <li>Realização da <strong>1ª Conferência Nacional de Defesa Civil e Assistência Humanitária</strong></li>
+            <li>Participação de 1.500 delegados de todo o Brasil</li>
+            <li>Aprovação de 104 diretrizes para fortalecer a Defesa Civil, principalmente em nível municipal</li>
+        </ul>
+    </div>
+
+    <div class="tooltip" id="tooltip-2010">
+        <h3>2010s – Iniciativas do Século XXI</h3>
+        <p><strong>Ações de modernização da Defesa Civil:</strong></p>
+        <ul>
+            <li>Im plantação do Plano Nacional de Proteção e Defesa Civil</li>
+            <li>Criação do Banco de Dados de Registros de Desastres</li>
+            <li>Mapeamento de riscos no Brasil</li>
+            <li>Elaboração do Atlas Brasileiro de Desastres Naturais</li>
+            <li>Aprovação da Política Nacional de Proteção e Defesa Civil (PNDEC)</li>
+            <li>Sistemas de monitoramento e gestão de riscos</li>
+        </ul>
+    </div>
+ <!--
+    <div class="tooltip" id="tooltip-2019">
+        <h3>2019</h3>
+        <p>Continuidade das ações de modernização e fortalecimento da Defesa Civil no Brasil</p>
+    </div>
+
+    <div class="tooltip" id="tooltip-2023">
+        <h3>2023</h3>
+        <p>Desenvolvimento de novas tecnologias e estratégias para enfrentar os desafios das mudanças climáticas</p>
+    </div>
+-->
+    <div class="tooltip" id="tooltip-2024">
+        <h3>2024 – Amazonas</h3>
+        <ul>
+            <li>Durante a gestão do governador <strong>Wilson Lima</strong>, houve aumento significativo nos investimentos em Defesa Civil</li>
+            <li>Em 11 de setembro de 2024, a Assembleia Legislativa aprova o <strong>Projeto de Lei nº 585/2024</strong>, que eleva a Defesa Civil à categoria de <strong>Secretaria de Estado</strong></li>
+            <li>A medida fortalece a capacidade de resposta do estado aos impactos das mudanças climáticas</li>
+        </ul>
+    </div>
+
+    <div class="tooltip" id="tooltip-2025">
+        <h3>2025</h3>
+        <p>Futuro promissor com a nova estrutura de Secretaria de Estado e investimentos contínuos na Defesa Civil do Amazonas</p>
+    </div>
+
+    <script>
+        // Dados dos tooltips
+        const tooltipData = {
+            '1942': 'tooltip-1942',
+            '1943': 'tooltip-1943',
+            '1946': 'tooltip-1946',
+            '1966': 'tooltip-1966',
+            '1967': 'tooltip-1967',
+            '1971': 'tooltip-1971',
+            '1977': 'tooltip-1977',
+            '1988': 'tooltip-1988',
+            '1990': 'tooltip-1990',
+            '1998': 'tooltip-1998',
+            '2008': 'tooltip-2008',
+            '2009': 'tooltip-2009',
+            '2010': 'tooltip-2010',
+            '2019': 'tooltip-2019',
+            '2023': 'tooltip-2023',
+            '2024': 'tooltip-2024',
+            '2025': 'tooltip-2025'
+        };
+
+        // Função para posicionar tooltip
+        function positionTooltip(tooltip, yearBlock) {
+            const rect = yearBlock.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const year = yearBlock.getAttribute('data-year');
+            
+            // Para os anos 1990 e 2010, posicionar ao lado
+            if (year === '2010' || year === '1990') {
+                // Posição ao lado direito do bloco
+                let left = rect.right + 20;
+                let top = rect.top + (rect.height / 2) - (tooltipRect.height / 2);
+                
+                // Se não couber à direita, posicionar à esquerda
+                if (left + tooltipRect.width > window.innerWidth - 20) {
+                    left = rect.left - tooltipRect.width - 20;
+                }
+                
+                // Ajustar se sair da tela verticalmente
+                if (top < 20) top = 20;
+                if (top + tooltipRect.height > window.innerHeight - 20) {
+                    top = window.innerHeight - tooltipRect.height - 20;
+                }
+                
+                tooltip.style.left = left + 'px';
+                tooltip.style.top = top + 'px';
+            } else {
+                // Posicionamento normal para outros anos
+                let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+                
+                // Ajustar se sair da tela
+                if (left < 20) left = 20;
+                if (left + tooltipRect.width > window.innerWidth - 20) {
+                    left = window.innerWidth - tooltipRect.width - 20;
+                }
+                
+                // Posição vertical
+                let top = rect.top - tooltipRect.height - 20;
+                if (top < 20) {
+                    top = rect.bottom + 20;
+                }
+                
+                tooltip.style.left = left + 'px';
+                tooltip.style.top = top + 'px';
+            }
+        }
+
+        // Event listeners para os blocos de ano
+        document.querySelectorAll('.year-block').forEach(block => {
+            const year = block.getAttribute('data-year');
+            const tooltipId = tooltipData[year];
+            
+            if (tooltipId) {
+                const tooltip = document.getElementById(tooltipId);
+                
+                block.addEventListener('mouseenter', function() {
+                    // Esconder todos os tooltips
+                    document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('show'));
+                    
+                    // Mostrar o tooltip atual
+                    tooltip.classList.add('show');
+                    positionTooltip(tooltip, block);
+                });
+                
+                block.addEventListener('mouseleave', function() {
+                    tooltip.classList.remove('show');
+                });
+                
+                block.addEventListener('mousemove', function() {
+                    positionTooltip(tooltip, block);
+                });
+            }
+        });
+
+        // Esconder tooltips ao clicar fora
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.year-block')) {
+                document.querySelectorAll('.tooltip').forEach(tooltip => {
+                    tooltip.classList.remove('show');
+                });
+            }
+        });
+
+        // Ajustar posição dos tooltips no resize
+        window.addEventListener('resize', function() {
+            document.querySelectorAll('.tooltip.show').forEach(tooltip => {
+                const yearBlock = document.querySelector(`[data-year="${tooltip.id.replace('tooltip-', '')}"]`);
+                if (yearBlock) {
+                    positionTooltip(tooltip, yearBlock);
+                }
+            });
+        });
+
+        // Animação de entrada
+        window.addEventListener('load', function() {
+            const yearBlocks = document.querySelectorAll('.year-block');
+            yearBlocks.forEach((block, index) => {
+                block.style.opacity = '0';
+                block.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    block.style.transition = 'all 0.5s ease';
+                    block.style.opacity = '1';
+                    block.style.transform = 'translateY(0)';
+                }, index * 50);
+            });
+        });
+    </script>
+</body>
+
+</html>
