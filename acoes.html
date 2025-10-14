@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ações - Defesa Civil Amazonas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('public/PAINEL-TOTEM-DCAM-acoes.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 40px;
+            right: 30px;
+            background: #ffffff;
+            color: #2c3e50;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, filter 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background: #ffffff;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2), 0 0 18px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.7);
+            filter: brightness(1.05);
+        }
+
+        .content {
+            background: transparent;
+            border-radius: 25px;
+            padding: 60px;
+            backdrop-filter: blur(10px);
+            width: 95%;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .title {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .development-text {
+            color: white;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: justify;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .development-text {
+                font-size: 1rem;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.8rem;
+            }
+
+            .development-text {
+                font-size: 0.9rem;
+                padding: 15px;
+            }
+
+            .back-button {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="back-button" onclick="window.history.back()">
+        <span>←</span>
+        <span>Voltar</span>
+    </button>
+
+    <div class="container">
+        <div class="content">
+            <h1 class="title">Ações da Defesa Civil</h1>
+            <div class="development-text">
+                <p>
+                    A Defesa Civil do Amazonas desenvolve diversas ações estratégicas para proteger a população e o território estadual. 
+                    Entre as principais atividades estão o monitoramento meteorológico, alertas preventivos, coordenação de evacuações, 
+                    distribuição de ajuda humanitária e reconstrução de áreas afetadas por desastres.
+                </p>
+                <p>
+                    As ações são organizadas em quatro fases principais: <strong>Prevenção</strong> (redução de riscos), 
+                    <strong>Preparação</strong> (capacitação e planejamento), <strong>Resposta</strong> (atendimento em emergências) 
+                    e <strong>Reconstrução</strong> (recuperação pós-desastre).
+                </p>
+                <p>
+                    A Defesa Civil trabalha em parceria com órgãos municipais, federais e organizações não-governamentais para 
+                    garantir uma resposta eficiente e coordenada em situações de emergência e calamidade pública.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

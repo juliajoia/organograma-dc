@@ -11,9 +11,15 @@
             box-sizing: border-box;
         }
 
+        img {
+            background: none !important;
+            border: none !important;
+            outline: none !important;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
-            background-image: url('public/painel defesa civil - totem fundo.png');
+            background-image: url('public/PAINEL-TOTEM-DCAM-historico.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -36,9 +42,9 @@
 
         .back-button {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.9);
+            top: 40px;
+            right: 30px;
+            background: #ffffff;
             color: #2c3e50;
             border: none;
             padding: 12px 20px;
@@ -46,7 +52,7 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, filter 0.25s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             z-index: 1000;
             display: flex;
@@ -57,9 +63,10 @@
         }
 
         .back-button:hover {
-            background: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            background: #ffffff;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2), 0 0 18px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.7);
+            filter: brightness(1.05);
         }
 
         .title {
@@ -73,7 +80,7 @@
         }
 
         .timeline-container {
-            background: transparent;
+            background: none;
             border: none;
             padding: 50px;
             width: 99%;
@@ -84,7 +91,7 @@
         .timeline {
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            gap: 36px;
             position: relative;
         }
 
@@ -93,72 +100,55 @@
             justify-content: center;
             align-items: center;
             gap: 0;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            margin-bottom: 5px;
         }
 
         .year-block {
             position: relative;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin: 0 -25px;
+            z-index: 1;
+            background: none;
+            border: none;
+            outline: none;
         }
 
         .year-block:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: none;
         }
 
-        .year-block.orange {
-            background: #FF7F00;
-            color: white;
+        .year-block img {
+            width: 100%;
+            height: auto;
+            max-width: 280px;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0;
+            padding: 0;
+            background: none;
+            border: none;
+            outline: none;
+            mix-blend-mode: normal;
+            opacity: 1;
         }
 
-        .year-block.white {
-            background: white;
-            color: #333;
+        .year-block:hover img {
+            filter: none;
         }
 
-        .year-block.rounded-left {
-            border-top-left-radius: 25px;
-            border-bottom-left-radius: 25px;
+        /* Removendo bordas arredondadas para eliminar fundos */
+        .year-block:first-child img {
+            border-radius: 0;
         }
 
-        .year-block.rounded-right {
-            border-top-right-radius: 25px;
-            border-bottom-right-radius: 25px;
+        .year-block:last-child img {
+            border-radius: 0;
         }
 
-        .year-block.rounded-both {
-            border-radius: 25px;
-        }
-
-        .year-block.rectangular {
-            border-radius: 8px;
-        }
-
-        .year-block .year-text {
-            padding: 25px 45px;
-            font-size: 1.6rem;
-            font-weight: bold;
-            text-align: center;
-            white-space: nowrap;
-            color: inherit;
-        }
-
-        .year-block.orange .year-text {
-            color: white;
-        }
-
-        .year-block.white .year-text {
-            color: #333;
-        }
-
-        .start-cap {
-            width: 30px;
-            height: 60px;
-            background: #666;
-            border-radius: 15px;
-            margin-right: -5px;
-        }
 
         .tooltip {
             position: absolute;
@@ -174,7 +164,7 @@
                 0 25px 50px rgba(0, 0, 0, 0.4),
                 0 10px 25px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(20px);
-            border: 3px solid rgba(255, 127, 0, 0.3);
+            border: 3px solid rgba(236, 95, 7, 0.3);
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -189,7 +179,7 @@
 
 
         .tooltip h3 {
-            color: #FF7F00;
+            color: #EC5F07;
             margin-bottom: 20px;
             font-size: 1.6rem;
             font-weight: 700;
@@ -208,7 +198,7 @@
         }
 
         .tooltip strong {
-            color: #FF7F00;
+            color: #EC5F07;
             font-weight: 700;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
@@ -238,7 +228,7 @@
 
         .logo-main {
             font-size: 1.8rem;
-            color: #FF7F00;
+            color: #EC5F07;
             font-weight: bold;
             margin-bottom: 5px;
         }
@@ -260,7 +250,6 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .title {
                 font-size: 2rem;
@@ -270,9 +259,8 @@
                 padding: 40px 25px;
             }
 
-            .year-block .year-text {
-                padding: 12px 20px;
-                font-size: 1.1rem;
+            .year-block img {
+                max-width: 250px;
             }
 
             .tooltip {
@@ -289,17 +277,18 @@
 
         @media (max-width: 480px) {
             .timeline-row {
-                flex-direction: column;
-                gap: 15px;
+                flex-direction: row;
+                gap: 0;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             .year-block {
-                width: 100%;
+                margin: 0 -15px;
             }
 
-            .year-block .year-text {
-                padding: 15px;
-                font-size: 1.1rem;
+            .year-block img {
+                max-width: 180px;
             }
 
             .tooltip {
@@ -320,78 +309,77 @@
     <div class="container">
         <div class="timeline-container">
             <div class="timeline">
-                <!-- Primeira linha -->
+                
                 <div class="timeline-row">
-                    <div class="year-block orange rounded-left" data-year="1942">
-                        <div class="year-text">1942</div>
+                    <div class="year-block" data-year="1942">
+                        <img src="public/HISTORICO-ANOS-1942.png" alt="1942">
                     </div>
-                    <div class="year-block white rectangular" data-year="1943">
-                        <div class="year-text">1943</div>
+                    <div class="year-block" data-year="1943">
+                        <img src="public/HISTORICO-ANOS-1943.png" alt="1943">
                     </div>
-                    <div class="year-block orange rectangular" data-year="1946">
-                        <div class="year-text">1946</div>
+                    <div class="year-block" data-year="1946">
+                        <img src="public/HISTORICO-ANOS-1946.png" alt="1946">
                     </div>
-                    <div class="year-block white rectangular" data-year="1966">
-                        <div class="year-text">1966</div>
+                    <div class="year-block" data-year="1966">
+                        <img src="public/HISTORICO-ANOS-1966.png" alt="1966">
                     </div>
-                    <div class="year-block orange rounded-right" data-year="1967">
-                        <div class="year-text">1967</div>
+                    <div class="year-block" data-year="1967">
+                        <img src="public/HISTORICO-ANOS-1967.png" alt="1967">
                     </div>
                 </div>
 
-                <!-- Segunda linha -->
+                
                 <div class="timeline-row">
-                    
-                    <div class="year-block white rounded-left" data-year="1971">
-                        <div class="year-text">1971</div>
+                    <div class="year-block" data-year="1971">
+                        <img src="public/HISTORICO-ANOS-1971.png" alt="1971">
                     </div>
-                    <div class="year-block orange rectangular" data-year="1977">
-                        <div class="year-text">1977</div>
+                    <div class="year-block" data-year="1977">
+                        <img src="public/HISTORICO-ANOS-1977.png" alt="1977">
                     </div>
-                    <div class="year-block white rectangular" data-year="1988">
-                        <div class="year-text">1988</div>
+                    <div class="year-block" data-year="1988">
+                        <img src="public/HISTORICO-ANOS-1988.png" alt="1988">
                     </div>
-                    <div class="year-block orange rectangular" data-year="1990">
-                        <div class="year-text">1990</div>
+                    <div class="year-block" data-year="1990">
+                        <img src="public/HISTORICO-ANOS-1990.png" alt="1990">
                     </div>
-                    <div class="year-block white rounded-right" data-year="1998">
-                        <div class="year-text">1998</div>
+                    <div class="year-block" data-year="1998">
+                        <img src="public/HISTORICO-ANOS-1998.png" alt="1998">
                     </div>
                 </div>
 
-                <!-- Terceira linha -->
+                
                 <div class="timeline-row">
-                    <div class="year-block orange rounded-left" data-year="2008">
-                        <div class="year-text">2008</div>
+                    <div class="year-block" data-year="2008">
+                        <img src="public/HISTORICO-ANOS-2008.png" alt="2008">
                     </div>
-                    <div class="year-block white rectangular" data-year="2009">
-                        <div class="year-text">2009</div>
+                    <div class="year-block" data-year="2009">
+                        <img src="public/HISTORICO-ANOS-2009.png" alt="2009">
                     </div>
-                    <div class="year-block orange rectangular" data-year="2010">
-                        <div class="year-text">2010</div>
+                    <div class="year-block" data-year="2010">
+                        <img src="public/HISTORICO-ANOS-2010.png" alt="2010">
                     </div>
-                    <div class="year-block white rectangular" data-year="2019">
-                        <div class="year-text">2019</div>
+                    <div class="year-block" data-year="2019">
+                        <img src="public/HISTORICO-ANOS-2019.png" alt="2019">
                     </div>
-                    <div class="year-block orange rounded-right" data-year="2023">
-                        <div class="year-text">2023</div>
+                    <div class="year-block" data-year="2023">
+                        <img src="public/HISTORICO-ANOS-2023.png" alt="2023">
                     </div>
                 </div>
 
-                <!-- Quarta linha -->
+                
                 <div class="timeline-row">
-                    <div class="year-block orange rounded-left" data-year="2024">
-                        <div class="year-text">2024</div>
+                    <div class="year-block" data-year="2024">
+                        <img src="public/HISTORICO-ANOS-2024.png" alt="2024">
                     </div>
-                    <div class="year-block white rounded-right" data-year="2025">
-                        <div class="year-text">2025</div>
+                    <div class="year-block" data-year="2025">
+                        <img src="public/HISTORICO-ANOS-2025.png" alt="2025">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Tooltips -->
+        
     <div class="tooltip" id="tooltip-1942">
         <h3>1942 – Segunda Guerra Mundial</h3>
         <ul>
@@ -518,7 +506,7 @@
     </div>
 
     <script>
-        // Dados dos tooltips
+        
         const tooltipData = {
             '1942': 'tooltip-1942',
             '1943': 'tooltip-1943',
@@ -539,24 +527,20 @@
             '2025': 'tooltip-2025'
         };
 
-        // Função para posicionar tooltip
+        
         function positionTooltip(tooltip, yearBlock) {
             const rect = yearBlock.getBoundingClientRect();
             const tooltipRect = tooltip.getBoundingClientRect();
             const year = yearBlock.getAttribute('data-year');
             
-            // Para os anos 1990 e 2010, posicionar ao lado
+            
             if (year === '2010' || year === '1990') {
-                // Posição ao lado direito do bloco
                 let left = rect.right + 20;
                 let top = rect.top + (rect.height / 2) - (tooltipRect.height / 2);
-                
-                // Se não couber à direita, posicionar à esquerda
                 if (left + tooltipRect.width > window.innerWidth - 20) {
                     left = rect.left - tooltipRect.width - 20;
                 }
                 
-                // Ajustar se sair da tela verticalmente
                 if (top < 20) top = 20;
                 if (top + tooltipRect.height > window.innerHeight - 20) {
                     top = window.innerHeight - tooltipRect.height - 20;
@@ -565,16 +549,13 @@
                 tooltip.style.left = left + 'px';
                 tooltip.style.top = top + 'px';
             } else {
-                // Posicionamento normal para outros anos
                 let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-                
-                // Ajustar se sair da tela
                 if (left < 20) left = 20;
                 if (left + tooltipRect.width > window.innerWidth - 20) {
                     left = window.innerWidth - tooltipRect.width - 20;
                 }
                 
-                // Posição vertical
+                
                 let top = rect.top - tooltipRect.height - 20;
                 if (top < 20) {
                     top = rect.bottom + 20;
@@ -585,7 +566,6 @@
             }
         }
 
-        // Event listeners para os blocos de ano
         document.querySelectorAll('.year-block').forEach(block => {
             const year = block.getAttribute('data-year');
             const tooltipId = tooltipData[year];
@@ -594,10 +574,7 @@
                 const tooltip = document.getElementById(tooltipId);
                 
                 block.addEventListener('mouseenter', function() {
-                    // Esconder todos os tooltips
                     document.querySelectorAll('.tooltip').forEach(t => t.classList.remove('show'));
-                    
-                    // Mostrar o tooltip atual
                     tooltip.classList.add('show');
                     positionTooltip(tooltip, block);
                 });
@@ -612,7 +589,7 @@
             }
         });
 
-        // Esconder tooltips ao clicar fora
+        
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.year-block')) {
                 document.querySelectorAll('.tooltip').forEach(tooltip => {
@@ -621,7 +598,7 @@
             }
         });
 
-        // Ajustar posição dos tooltips no resize
+        
         window.addEventListener('resize', function() {
             document.querySelectorAll('.tooltip.show').forEach(tooltip => {
                 const yearBlock = document.querySelector(`[data-year="${tooltip.id.replace('tooltip-', '')}"]`);
@@ -631,8 +608,21 @@
             });
         });
 
-        // Animação de entrada
+        
         window.addEventListener('load', function() {
+            const applyZIndexOrdering = () => {
+                document.querySelectorAll('.timeline-row').forEach(row => {
+                    const blocks = Array.from(row.querySelectorAll('.year-block'));
+                    const startZ = 2000;
+                    blocks.forEach((b, idx) => {
+                        const z = String(startZ - idx);
+                        b.style.zIndex = z;
+                        b.setAttribute('data-base-z', z);
+                    });
+                });
+            };
+
+            applyZIndexOrdering();
             const yearBlocks = document.querySelectorAll('.year-block');
             yearBlocks.forEach((block, index) => {
                 block.style.opacity = '0';

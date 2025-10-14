@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background-image: url('public/painel defesa civil - totem fundo.png');
+            background-image: url('public/PAINEL-TOTEM-DCAM-informativos.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -32,23 +32,6 @@
             text-align: center;
         }
 
-        .header {
-            background: transparent;
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
         .content {
             padding: 40px;
             background: transparent;
@@ -56,6 +39,7 @@
 
         .year-section {
             margin-bottom: 50px;
+            text-align: left;
         }
 
         .year-title {
@@ -64,21 +48,9 @@
             font-weight: bold;
             margin-bottom: 30px;
             display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: nowrap;
-        }
-
-        .year-icon {
-            width: 30px;
-            height: 30px;
-            background: #3498db;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
         }
 
         .months-container {
@@ -89,26 +61,34 @@
         }
 
         .month-button {
-            background: linear-gradient(135deg, #FF7F00 0%, #FF9933 100%);
-            color: white;
+            background: #ffffff;
+            color: #db8700;
             border: none;
             padding: 12px 18px;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 1.1rem;
             font-weight: 600;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 127, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18), 0 0 8px rgba(255, 255, 255, 0.6);
         }
 
         .month-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 127, 0, 0.4);
-            background: linear-gradient(135deg, #FF9933 0%, #FF8C00 100%);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2), 0 0 14px rgba(236, 95, 7, 0.35);
+            background: #ffffff;
+            color: #c67600;
         }
 
-        .month-button:active {
-            transform: translateY(-1px);
+        .month-button.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .month-button.disabled:hover {
+            transform: none;
+            box-shadow: 0 4px 15px rgba(236, 95, 7, 0.3);
         }
 
         .semester-container {
@@ -118,23 +98,25 @@
         }
 
         .semester-button {
-            background: linear-gradient(135deg, #FF7F00 0%, #FF9933 100%);
-            color: white;
+            background: #ffffff;
+            color: #db8700;
             border: none;
             padding: 14px 20px;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 1.1rem;
             font-weight: 600;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 127, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18), 0 0 8px rgba(255, 255, 255, 0.6);
             text-align: center;
         }
 
         .semester-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 127, 0, 0.4);
-            background: linear-gradient(135deg, #FF9933 0%, #FF8C00 100%);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2), 0 0 14px rgba(236, 95, 7, 0.35);
+            background: #ffffff;
+            color: #c67600;
         }
 
         .annual-container {
@@ -144,29 +126,46 @@
         }
 
         .annual-button {
-            background: linear-gradient(135deg, #FF7F00 0%, #FF9933 100%);
-            color: white;
+            background: #ffffff;
+            color: #db8700;
             border: none;
             padding: 14px 24px;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 1.1rem;
             font-weight: 600;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 127, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18), 0 0 8px rgba(255, 255, 255, 0.6);
         }
 
         .annual-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 127, 0, 0.4);
-            background: linear-gradient(135deg, #FF9933 0%, #FF8C00 100%);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2), 0 0 14px rgba(236, 95, 7, 0.35);
+            background: #ffffff;
+            color: #c67600;
         }
+
+        .btn-orange {
+            background: linear-gradient(135deg, #db8700 0%, #db8700 100%);
+            color: #ffffff !important;
+            box-shadow: 0 6px 18px rgba(236, 95, 7, 0.28);
+        }
+
+        .btn-orange:hover {
+            background: linear-gradient(135deg, #c67600 0%, #c67600 100%);
+            color: #ffffff !important;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(236, 95, 7, 0.45), 0 0 16px rgba(255, 255, 255, 0.65) inset;
+        }
+
+        /* Removido efeito de borda colorida; manter apenas zoom + brilho no hover */
 
         .back-button {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.9);
+            top: 40px;
+            right: 30px;
+            background: #ffffff;
             color: #2c3e50;
             border: none;
             padding: 12px 20px;
@@ -174,7 +173,7 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, filter 0.25s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             z-index: 1000;
             display: flex;
@@ -184,20 +183,16 @@
         }
 
         .back-button:hover {
-            background: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            background: #ffffff;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2), 0 0 18px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.7);
+            filter: brightness(1.05);
         }
 
         @media (max-width: 768px) {
-            .container {
-                margin: auto;
-                text-align: center;
-            }
-            
             .months-container, .semester-container, .annual-container {
                 gap: 6px;
-                justify-content: center;
+                justify-content: flex-start;
             }
             
             .month-button {
@@ -212,11 +207,7 @@
             
             .year-title {
                 font-size: 2.2rem;
-                flex-wrap: wrap;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
+                gap: 10px;
             }
             
             .container {
@@ -242,71 +233,66 @@
     </button>
     
     <div class="container">
-        
         <div class="content">
-            <!-- 2025 - Botões por mês -->
             <div class="year-section">
                 <div class="year-title">
                     <span>2025</span>
                     <div class="months-container">
-                        <button class="month-button" onclick="openPdf('2025/janeiro.pdf')">Jan</button>
-                        <button class="month-button" onclick="openPdf('2025/fevereiro.pdf')">Fev</button>
-                        <button class="month-button" onclick="openPdf('2025/marco.pdf')">Mar</button>
-                        <button class="month-button" onclick="openPdf('2025/abril.pdf')">Abr</button>
-                        <button class="month-button" onclick="openPdf('2025/maio.pdf')">Mai</button>
-                        <button class="month-button" onclick="openPdf('2025/junho.pdf')">Jun</button>
-                        <button class="month-button" onclick="openPdf('2025/julho.pdf')">Jul</button>
-                        <button class="month-button" onclick="openPdf('2025/agosto.pdf')">Ago</button>
-                        <button class="month-button" onclick="openPdf('2025/setembro.pdf')">Set</button>
-                        <button class="month-button" onclick="openPdf('2025/outubro.pdf')">Out</button>
-                        <button class="month-button" onclick="openPdf('2025/novembro.pdf')">Nov</button>
-                        <button class="month-button" onclick="openPdf('2025/dezembro.pdf')">Dez</button>
+                        <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/12htSdjAsWql9IrBPykWrp3j-ANqo3-Yt/view?usp=sharing')">Jan</button>
+                        <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/15A9LtuEuQWPbaOWgmNcIOIOCzu9exMCn/view?usp=sharing')">Fev</button>
+                        <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1fjE4bdo0YMXak-Slc4UVCtSiyajs0jxJ/view?usp=sharing')">Mar</button>
+                        <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1OHmsKrGo3eAlhpn9UGw6dBj2JRUXVyqr/view?usp=sharing')">Abr</button>
+                        <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1Cn_unlFET2OiKlnJybD9IZ76A25xPf3D/view?usp=sharing')">Mai</button>
+                        <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1UH2X9q4ZFeCkrYye-EHgwh9LvJquuV0Z/view?usp=sharing')">Jun</button>
+                        <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1hZiiJrgqKrrDUeyDUbS5UhTAqgP13THd/view?usp=sharing')">Jul</button>
+                        <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1FLLecYDWvHLgudhuQkVq-fJfuiByK5bw/view?usp=sharing')">Ago</button>
+                        <button class="month-button disabled">Set</button>
+                        <button class="month-button disabled">Out</button>
+                        <button class="month-button disabled">Nov</button>
+                        <button class="month-button disabled">Dez</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 2024 - Primeiro e Segundo Semestre -->
             <div class="year-section">
                 <div class="year-title">
                     <span>2024</span>
                     <div class="semester-container">
-                        <button class="semester-button" onclick="openPdf('https://drive.google.com/file/d/18xj_pZcI_N6x2l9hND7nrCNclaeux0tH/view?usp=sharing')">
+                        <button class="semester-button btn-orange" onclick="openPdf('https://drive.google.com/file/d/18xj_pZcI_N6x2l9hND7nrCNclaeux0tH/view?usp=sharing')">
                             Primeiro Semestre<br>
                         </button>
-                        <button class="semester-button" onclick="openPdf('https://drive.google.com/file/d/1hk8h6SE2ANS1oiMh1EEgPnxNg-LNB4jl/view?usp=sharing')">
+                        <button class="semester-button btn-orange" onclick="openPdf('https://drive.google.com/file/d/1hk8h6SE2ANS1oiMh1EEgPnxNg-LNB4jl/view?usp=sharing')">
                             Segundo Semestre<br>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- 2021 - Botões por mês -->
             <div class="year-section">
                 <div class="year-title">
                     <span>2021</span>
                     <div class="months-container">
-                        <button class="month-button" onclick="openPdf('')">Jan</button>
+                        <button class="month-button disabled">Jan</button>
                         <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1rYIEoNOYPnjLDvCCDpFqeVh2ZvaCb0Aj/view?usp=sharing')">Fev</button>
                         <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1PbP-cjuelBzhzWoCZNs6NXX92pt6oRo_/view?usp=sharing')">Mar</button>
-                        <button class="month-button" onclick="openPdf('')">Abr</button>
-                        <button class="month-button" onclick="openPdf('')">Mai</button>
+                        <button class="month-button disabled">Abr</button>
+                        <button class="month-button disabled">Mai</button>
                         <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1z6cm8HlppSNgKd545sjIBCAqhXXXa9ZH/view?usp=sharing')">Jun</button>
                         <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1c0ijYvUY2TbscpWHewzs0jZN-GdhNsLe/view?usp=sharing')">Jul</button>
                         <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1SglDvzqb2z7lIfmNXOncys_144Sh2hZz/view?usp=sharing')">Ago</button>
                         <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1tvXY-trtnbARYckla0eUigqPf7h3fRYz/view?usp=sharing')">Set</button>
                         <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/1ebuamjeATd0FmH__Kf8sJDMe-f82QEqP/view?usp=sharing')">Out</button>
                         <button class="month-button" onclick="openPdf('https://drive.google.com/file/d/101SrS0eJz06CCdLFWNgnR3hS_KgRPqGu/view?usp=sharing')">Nov</button>
-                        <button class="month-button" onclick="openPdf('')">Dez</button>
+                        <button class="month-button disabled">Dez</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 2019 - Informativo Anual -->
             <div class="year-section">
                 <div class="year-title">
                     <span>2019</span>
                     <div class="annual-container">
-                        <button class="annual-button" onclick="openPdf('https://drive.google.com/file/d/1HlB4MAGKneY3Ig32YRsjtzPOYnuHD0Qm/view?usp=sharing')">
+                        <button class="annual-button btn-orange" onclick="openPdf('https://drive.google.com/file/d/1HlB4MAGKneY3Ig32YRsjtzPOYnuHD0Qm/view?usp=sharing')">
                             Informativo Anual 2019
                         </button>
                     </div>
@@ -317,13 +303,8 @@
 
     <script>
         function openPdf(pdfPath) {
-            // Verifica se o caminho do PDF está vazio ou não fornecido
             if (pdfPath && pdfPath.trim() !== '') {
-                // Abre o PDF em nova aba
                 window.open(pdfPath, '_blank');
-            } else {
-                // Mostra alerta se o PDF não estiver disponível
-                alert('PDF não disponível no momento.');
             }
         }
     </script>

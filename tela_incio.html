@@ -127,7 +127,7 @@
             margin-top: 20px;
         }
 
-        /* Responsive */
+ 
         @media (max-width: 768px) {
             .title {
                 font-size: 2rem;
@@ -224,7 +224,7 @@
                     </div>
                 </a>
 
-                <a href="operacoes.html" class="menu-item">
+                <a href="legislacao.html" class="menu-item">
                     <div class="menu-text">Legislação</div>
                     <div class="menu-icon">
                         <img src="public/botões operações.png" alt="Legislação">
@@ -243,10 +243,10 @@
     </div>
 
     <script>
-        // Adicionar efeitos de interação
+
         document.querySelectorAll('.menu-item').forEach(item => {
             item.addEventListener('click', function (e) {
-                // Adicionar efeito de clique
+
                 this.style.transform = 'scale(0.95)';
                 setTimeout(() => {
                     this.style.transform = '';
@@ -254,7 +254,6 @@
             });
         });
 
-        // Adicionar animação de entrada
         window.addEventListener('load', function () {
             const menuItems = document.querySelectorAll('.menu-item');
             menuItems.forEach((item, index) => {
