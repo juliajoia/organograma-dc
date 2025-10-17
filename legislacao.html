@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background-image: url('public/PAINEL-TOTEM-DCAM-legislacao.png');
+            background-image: url('https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/PAINEL-TOTEM-DCAM-legislacao.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -28,99 +28,148 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 80px 10px 20px;
             position: relative;
             z-index: 1;
         }
 
         .back-button {
             position: fixed;
-            top: 40px;
+            top: 20px;
             right: 30px;
-            background: #ffffff;
-            color: #2c3e50;
+            background: transparent;
             border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, filter 0.25s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.25s ease;
             z-index: 1000;
+            width: 100px;
+            height: 75px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            text-decoration: none;
+        }
+
+        .back-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .back-button:hover {
-            background: #ffffff;
             transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2), 0 0 18px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.7);
-            filter: brightness(1.05);
         }
 
         .content {
             background: transparent;
             border-radius: 25px;
-            padding: 60px;
+            padding: 40px;
             backdrop-filter: blur(10px);
             width: 95%;
-            max-width: 1200px;
+            max-width: 1400px;
             text-align: center;
+            margin: 250px auto;
         }
 
-        .title {
-            color: white;
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 50px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            letter-spacing: 2px;
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 140px;
+            flex-wrap: nowrap;
+            margin-top: 0;
+            margin-bottom: 40px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .development-text {
-            color: white;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            text-align: justify;
-            font-weight: bold;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 30px;
+        .legislation-button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            width: 350px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+
+        .legislation-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             border-radius: 15px;
-            backdrop-filter: blur(5px);
+        }
+
+        .legislation-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .legislation-button:active {
+            transform: translateY(-2px) scale(1.02);
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .title {
-                font-size: 2rem;
+        @media (max-width: 1200px) {
+            .buttons-container {
+                gap: 60px;
             }
 
+            .legislation-button {
+                width: 280px;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
             .content {
                 padding: 30px 20px;
             }
 
-            .development-text {
-                font-size: 1rem;
-                padding: 20px;
+            .buttons-container {
+                gap: 40px;
+            }
+
+            .legislation-button {
+                width: 220px;
+                height: 160px;
+            }
+
+            .instruction-text {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .buttons-container {
+                gap: 25px;
+            }
+
+            .legislation-button {
+                width: 180px;
+                height: 130px;
             }
         }
 
         @media (max-width: 480px) {
-            .title {
-                font-size: 1.8rem;
+            .buttons-container {
+                flex-direction: column;
+                gap: 20px;
             }
 
-            .development-text {
-                font-size: 0.9rem;
-                padding: 15px;
+            .legislation-button {
+                width: 250px;
+                height: 180px;
+            }
+
+            .instruction-text {
+                font-size: 1rem;
             }
 
             .back-button {
@@ -134,32 +183,43 @@
 
 <body>
     <button class="back-button" onclick="window.history.back()">
-        <span>←</span>
-        <span>Voltar</span>
+        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/botão-totem-home.png" alt="Voltar">
     </button>
 
     <div class="container">
         <div class="content">
-            <h1 class="title">Legislação da Defesa Civil</h1>
-            <div class="development-text">
-                <p>
-                    A Defesa Civil do Amazonas é regida por um conjunto de leis e normas que estabelecem sua estrutura, 
-                    competências e procedimentos. A legislação inclui desde a Constituição Federal até decretos estaduais 
-                    específicos que regulamentam as ações de proteção e defesa civil.
-                </p>
-                <p>
-                    Entre os principais marcos legais estão o <strong>Decreto Federal nº 97.274/1988</strong>, que criou o 
-                    Sistema Nacional de Defesa Civil (SINDEC), e a <strong>Lei Estadual</strong> que criou o Subcomando de 
-                    Ações de Defesa Civil (SUBCOMADEC) em 2008.
-                </p>
-                <p>
-                    Em 2024, com a elevação da Defesa Civil à categoria de Secretaria de Estado através do 
-                    <strong>Projeto de Lei nº 585/2024</strong>, a legislação foi atualizada para refletir a nova estrutura 
-                    organizacional e as competências ampliadas do órgão.
-                </p>
+            <div class="buttons-container">
+                <button class="legislation-button" onclick="navigateToPortaria()">
+                    <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/botao-legislacao-portaria.png" alt="Portarias">
+                </button>
+                <button class="legislation-button" onclick="navigateToLeis()">
+                    <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/botao-legislacao-leis.png" alt="Leis">
+                </button>
+                <button class="legislation-button" onclick="navigateToLGPD()">
+                    <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/botao-legislacao-lgpd.png" alt="LGPD">
+                </button>
             </div>
+            
         </div>
     </div>
+
+    <script>
+        function navigateToPortaria() {
+            window.location.href = 'portarias.html';
+        }
+
+        function navigateToLeis() {
+            // Função para navegar para a página de leis
+            console.log('Navegando para Leis');
+            // Aqui você pode adicionar a navegação quando criar as páginas
+        }
+
+        function navigateToLGPD() {
+            // Função para navegar para a página de LGPD
+            console.log('Navegando para LGPD');
+            // Aqui você pode adicionar a navegação quando criar as páginas
+        }
+    </script>
 </body>
 
 </html>

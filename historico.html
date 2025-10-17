@@ -19,7 +19,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background-image: url('public/PAINEL-TOTEM-DCAM-historico.png');
+            background-image: url('https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/PAINEL-TOTEM-DCAM-historico.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -42,31 +42,28 @@
 
         .back-button {
             position: fixed;
-            top: 40px;
+            top: 20px;
             right: 30px;
-            background: #ffffff;
-            color: #2c3e50;
+            background: transparent;
             border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, filter 0.25s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.25s ease;
             z-index: 1000;
+            width: 100px;
+            height: 75px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            text-decoration: none;
+        }
+
+        .back-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .back-button:hover {
-            background: #ffffff;
             transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2), 0 0 18px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.7);
-            filter: brightness(1.05);
         }
 
         .title {
@@ -302,8 +299,7 @@
 
 <body>
     <button class="back-button" onclick="window.history.back()">
-        <span>←</span>
-        <span>Voltar</span>
+        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/botão-totem-home.png" alt="Voltar">
     </button>
 
     <div class="container">
@@ -312,67 +308,67 @@
                 
                 <div class="timeline-row">
                     <div class="year-block" data-year="1942">
-                        <img src="public/HISTORICO-ANOS-1942.png" alt="1942">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-1942.png" alt="1942">
                     </div>
                     <div class="year-block" data-year="1943">
-                        <img src="public/HISTORICO-ANOS-1943.png" alt="1943">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-1943.png" alt="1943">
                     </div>
                     <div class="year-block" data-year="1946">
-                        <img src="public/HISTORICO-ANOS-1946.png" alt="1946">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-1946.png" alt="1946">
                     </div>
                     <div class="year-block" data-year="1966">
-                        <img src="public/HISTORICO-ANOS-1966.png" alt="1966">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-1966.png" alt="1966">
                     </div>
                     <div class="year-block" data-year="1967">
-                        <img src="public/HISTORICO-ANOS-1967.png" alt="1967">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-1967.png" alt="1967">
                     </div>
                 </div>
 
                 
                 <div class="timeline-row">
                     <div class="year-block" data-year="1971">
-                        <img src="public/HISTORICO-ANOS-1971.png" alt="1971">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-1971.png" alt="1971">
                     </div>
                     <div class="year-block" data-year="1977">
-                        <img src="public/HISTORICO-ANOS-1977.png" alt="1977">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-1977.png" alt="1977">
                     </div>
                     <div class="year-block" data-year="1988">
-                        <img src="public/HISTORICO-ANOS-1988.png" alt="1988">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-1988.png" alt="1988">
                     </div>
                     <div class="year-block" data-year="1990">
-                        <img src="public/HISTORICO-ANOS-1990.png" alt="1990">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-1990.png" alt="1990">
                     </div>
                     <div class="year-block" data-year="1998">
-                        <img src="public/HISTORICO-ANOS-1998.png" alt="1998">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-1998.png" alt="1998">
                     </div>
                 </div>
 
                 
                 <div class="timeline-row">
                     <div class="year-block" data-year="2008">
-                        <img src="public/HISTORICO-ANOS-2008.png" alt="2008">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-2008.png" alt="2008">
                     </div>
                     <div class="year-block" data-year="2009">
-                        <img src="public/HISTORICO-ANOS-2009.png" alt="2009">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-2009.png" alt="2009">
                     </div>
                     <div class="year-block" data-year="2010">
-                        <img src="public/HISTORICO-ANOS-2010.png" alt="2010">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-2010.png" alt="2010">
                     </div>
                     <div class="year-block" data-year="2019">
-                        <img src="public/HISTORICO-ANOS-2019.png" alt="2019">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-2019.png" alt="2019">
                     </div>
                     <div class="year-block" data-year="2023">
-                        <img src="public/HISTORICO-ANOS-2023.png" alt="2023">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-2023.png" alt="2023">
                     </div>
                 </div>
 
                 
                 <div class="timeline-row">
                     <div class="year-block" data-year="2024">
-                        <img src="public/HISTORICO-ANOS-2024.png" alt="2024">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-2024.png" alt="2024">
                     </div>
                     <div class="year-block" data-year="2025">
-                        <img src="public/HISTORICO-ANOS-2025.png" alt="2025">
+                        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/HISTORICO-ANOS-2025.png" alt="2025">
                     </div>
                 </div>
             </div>

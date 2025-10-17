@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portarias - Defesa Civil Amazonas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/painel-portaria.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 80px 10px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+            z-index: 1000;
+            width: 100px;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .content {
+            background: transparent;
+            border-radius: 25px;
+            padding: 40px;
+            backdrop-filter: blur(6px);
+            width: 95%;
+            max-width: 1400px;
+            text-align: center;
+            margin: 200px auto 60px;
+        }
+
+        .title {
+            color: #ffffff;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+            margin-bottom: 24px;
+        }
+
+        .subtitle {
+            color: #ffffff;
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 14px;
+            padding: 16px 18px;
+            text-align: left;
+            color: #ffffff;
+            backdrop-filter: blur(6px);
+        }
+
+        .card strong {
+            display: block;
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+        }
+
+        .card a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 24px 18px;
+                margin-top: 140px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="back-button" onclick="window.history.back()">
+        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/botão-totem-home.png" alt="Voltar">
+    </button>
+
+    <div class="container">
+        <div class="content">
+            <h1 class="title">Portarias</h1>
+            <p class="subtitle">Seleção de portarias relevantes da Defesa Civil do Amazonas.</p>
+
+            <div class="grid" id="portariasGrid">
+                <!-- Itens de exemplo; substitua pelos links reais quando disponíveis -->
+                <div class="card">
+                    <strong>Portaria 001/2025</strong>
+                    <span>Institui diretrizes temporárias de resposta a desastres.</span>
+                </div>
+                <div class="card">
+                    <strong>Portaria 014/2024</strong>
+                    <span>Atualiza normas de prevenção a eventos hidrológicos.</span>
+                </div>
+                <div class="card">
+                    <strong>Portaria 212/2023</strong>
+                    <span>Estabelece fluxo de comunicação com municípios.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+
