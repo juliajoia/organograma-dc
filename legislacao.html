@@ -182,8 +182,8 @@
 </head>
 
 <body>
-    <button class="back-button" onclick="window.history.back()">
-        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/botão-totem-home.png" alt="Voltar">
+    <button class="back-button" onclick="window.location.href='tela_incio.html'">
+        <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/botão-totem-home.png" alt="Home">
     </button>
 
     <div class="container">
@@ -209,15 +209,11 @@
         }
 
         function navigateToLeis() {
-            // Função para navegar para a página de leis
-            console.log('Navegando para Leis');
-            // Aqui você pode adicionar a navegação quando criar as páginas
+            window.location.href = 'leis.html';
         }
 
         function navigateToLGPD() {
-            // Função para navegar para a página de LGPD
-            console.log('Navegando para LGPD');
-            // Aqui você pode adicionar a navegação quando criar as páginas
+            window.location.href = 'lgpd.html';
         }
     </script>
 </body>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leis Nacionais - Defesa Civil Amazonas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #222e64;
+            background-image: url('public/painel-leis.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .buttons-container {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            display: flex;
+            gap: 0px;
+            z-index: 1000;
+        }
+
+        .back-button, .home-button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+            width: 100px;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-button img, .home-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .back-button:hover, .home-button:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 100px 20px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title-container {
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title-image {
+            max-width: 150px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .laws-content {
+            width: 95%;
+            max-width: 1400px;
+            margin-top: 150px;
+        }
+
+        .legislation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            align-items: start;
+        }
+
+        .legislation-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .laws-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            width: 90%;
+        }
+
+        .law-button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            width: 70%;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .law-button img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .legislation-section:nth-child(2) .law-button img {
+            width: 90%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .law-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        .law-button:active {
+            transform: translateY(-1px) scale(1.01);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .legislation-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+
+            .title-image {
+                max-width: 120px;
+            }
+
+
+            .buttons-container {
+                top: 15px;
+                right: 20px;
+                gap: 0px;
+            }
+            
+            .back-button, .home-button {
+                width: 80px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 60px 10px 20px;
+            }
+
+
+            .legislation-grid {
+                gap: 30px;
+            }
+
+            .title-image {
+                max-width: 100px;
+            }
+
+
+            .buttons-container {
+                top: 10px;
+                right: 15px;
+                gap: 0px;
+            }
+            
+            .back-button, .home-button {
+                width: 70px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="buttons-container">
+        <button class="back-button" onclick="window.location.href='legislacao.html'">
+            <img src="public/botão-totem-voltar.png" alt="Voltar">
+        </button>
+        <button class="home-button" onclick="window.location.href='tela_incio.html'">
+            <img src="https://raw.githubusercontent.com/juliajoia/organograma-dc/main/public/botão-totem-home.png" alt="Home">
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="laws-content">
+            <div class="legislation-grid">
+                <div class="legislation-section">
+                    <div class="section-title">
+                        <img src="public/legislação-nacional.png" alt="Legislação Nacional" style="width: 60%; height: auto; object-fit: contain; margin-left: 30px;">
+                    </div>
+                    <div class="laws-container">
+                        <button class="law-button" onclick="openLaw('lei-14.750.pdf')">
+                            <img src="public/lei-14.750.png" alt="Lei 14.750">
+                        </button>
+
+                        <button class="law-button" onclick="openLaw('lei-12.983.pdf')">
+                            <img src="public/lei-12.983.png" alt="Lei 12.983">
+                        </button>
+
+                        <button class="law-button" onclick="openLaw('lei-12.608.pdf')">
+                            <img src="public/lei-12.608.png" alt="Lei 12.608">
+                        </button>
+
+                        <button class="law-button" onclick="openLaw('lei-12.340.pdf')">
+                            <img src="public/lei-12.340.png" alt="Lei 12.340">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Coluna Direita - Legislação Estadual -->
+                <div class="legislation-section">
+                    <div class="section-title">
+                        <img src="public/legislação-estadual.png" alt="Legislação Estadual" style="width: 55%; height: auto; object-fit: contain; margin-left: 20px;">
+                    </div>
+                    <div class="laws-container">
+                        <button class="law-button" onclick="openLaw('lei-estadual-7.772.pdf')">
+                            <img src="public/lei-estadual-7.772.png" alt="Lei Estadual 7.772">
+                        </button>
+
+                        <button class="law-button" onclick="openLaw('lei-estadual-7.056.pdf')">
+                            <img src="public/lei-estadual-7.056.png" alt="Lei Estadual 7.056">
+                        </button>
+
+                        <button class="law-button" onclick="openLaw('lei-estadual-5.820.pdf')">
+                            <img src="public/lei-estadual-5.820.png" alt="Lei Estadual 5.820">
+                        </button>
+
+                        <button class="law-button" onclick="openLaw('lei-estadual-12.608.pdf')">
+                            <img src="public/lei-estadual-12.608.png" alt="Lei Estadual 12.608">
+                        </button>
+
+                        <button class="law-button" onclick="openLaw('lei-estadual-3.330.pdf')">
+                            <img src="public/lei-estadual-3.330.png" alt="Lei Estadual 3.330">
+                        </button>
+
+                        <button class="law-button" onclick="openLaw('lei-estadual-3.331.pdf')">
+                            <img src="public/lei-estadual-3.331.png" alt="Lei Estadual 3.331">
+                        </button>
+
+                        <button class="law-button" onclick="openLaw('lei-delegada-89.pdf')">
+                            <img src="public/lei-delegada-89.png" alt="Lei Delegada 89">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openLaw(pdfFile) {
+            if (pdfFile === 'lei-14.750.pdf') {
+                // Redirecionamento para a Lei Nacional 14.750
+                window.location.href = 'https://drive.google.com/file/d/1zZ3gKt1Tjq3DKh93NulPh3Wbm425iFJr/view?usp=sharing';
+            } else if (pdfFile === 'lei-12.983.pdf') {
+                // Redirecionamento para a Lei 12.983
+                window.location.href = 'https://www.planalto.gov.br/CCIVIL_03/_Ato2011-2014/2014/Lei/L12983.htm';
+            } else if (pdfFile === 'lei-12.340.pdf') {
+                // Redirecionamento para a Lei 12.340
+                window.location.href = 'https://www.planalto.gov.br/ccivil_03/_Ato2007-2010/2010/Lei/L12340.htm';
+            } else if (pdfFile === 'lei-12.608.pdf') {
+                // Redirecionamento para a Lei Nacional 12.608
+                window.location.href = 'https://drive.google.com/file/d/1hwXql1SnnLb469J2aqFQhtTq8oQfQYic/view?usp=sharing';
+            } else if (pdfFile === 'lei-estadual-7.772.pdf') {
+                // Redirecionamento para a Lei Estadual 7.772
+                window.location.href = 'https://drive.google.com/file/d/197UUQf5C0qkHbEl7o56tbawb6GmYtLMP/view?usp=sharing';
+            } else if (pdfFile === 'lei-estadual-7.056.pdf') {
+                // Redirecionamento para a Lei Estadual 7.056
+                window.location.href = 'https://drive.google.com/file/d/19QsvSSt6nrZjYkXeZDKfG2DwYKZqlR5X/view?usp=sharing';
+            } else if (pdfFile === 'lei-estadual-5.820.pdf') {
+                // Redirecionamento para a Lei Estadual 5.820
+                window.location.href = 'https://legisla.imprensaoficial.am.gov.br/diario_am/12/2022/3/6953#:~:text=1%25C2%25BA%25';
+            } else if (pdfFile === 'lei-estadual-12.608.pdf') {
+                // Redirecionamento para a Lei Estadual 12.608
+                window.location.href = 'https://legislacao.presidencia.gov.br/atos/?tipo=LEI&numero=12608&ano=2012&ato=cf8ETRU1kMVpWT18a';
+            } else if (pdfFile === 'lei-estadual-3.330.pdf') {
+                // Redirecionamento para a Lei Estadual 3.330
+                window.location.href = 'https://drive.google.com/file/d/1OeSMpwJH6lY_b3eanVxwbe492eQj35Ti/view?usp=sharing';
+            } else if (pdfFile === 'lei-estadual-3.331.pdf') {
+                // Redirecionamento para a Lei Estadual 3.331
+                window.location.href = 'https://drive.google.com/file/d/1f4FfY54xfJ4s9rHUEd80oZ4OAuoLRB-K/view?usp=sharing';
+            } else if (pdfFile === 'lei-delegada-89.pdf') {
+                // Redirecionamento para a Lei Delegada 89
+                window.location.href = 'https://legisla.imprensaoficial.am.gov.br/diario_am/11/2007/5/2026';
+            } else {
+                // Para outras leis, apenas console.log por enquanto
+                console.log('Abrindo:', pdfFile);
+            }
+        }
+
+        // Animação de entrada
+        window.addEventListener('load', function() {
+            const title = document.querySelector('.title-image');
+            const buttons = document.querySelectorAll('.law-button');
+            
+            // Animar título
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(-30px)';
+            
+            setTimeout(() => {
+                title.style.transition = 'all 0.8s ease';
+                title.style.opacity = '1';
+                title.style.transform = 'translateY(0)';
+            }, 200);
+
+            // Animar botões sequencialmente
+            buttons.forEach((button, index) => {
+                button.style.opacity = '0';
+                button.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    button.style.transition = 'all 0.6s ease';
+                    button.style.opacity = '1';
+                    button.style.transform = 'translateY(0)';
+                }, 600 + (index * 200));
+            });
+        });
+    </script>
+</body>
+
+</html>
